@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lab3-configmap
+data:
+  REACT_APP_USERNAME: "lezchook"
+  REACT_APP_COMPANY_NAME: "lezchook-software"
