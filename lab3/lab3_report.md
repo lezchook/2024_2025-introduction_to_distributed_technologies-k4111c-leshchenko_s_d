@@ -60,7 +60,7 @@ openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out MyCertific
 ```
 Данная команда создает самоподписанный сертификат MyCertificate.crt и соответствующий ему закрытый ключ MyKey.key, привязанный к домену lezchook-software.com.
 
-Затем данный сертификат импортируется в k8s, как объект secret с помощью следующий команды:
+Затем данный сертификат импортируется в k8s, как объект secret, с помощью следующий команды:
 ```bash
 minikube kubectl -- create secret tls app-tls --key tls.key --cert tls.crt
 ```
@@ -68,7 +68,7 @@ minikube kubectl -- create secret tls app-tls --key tls.key --cert tls.crt
 #### 4. Создание Ingress
 Теперь создается объект Ingress, который использует сервис приложения и секрет с TLS-сертификатом, конфигурация данного объекта описывается файлом [ingress.yaml](./ingress.yaml).
 
-Перед созданием объекта Ingress нужно создать сервис, его можно так же описать при помощи конфигурационного файла, однако в данном случае для его создания была применена следующая команда:
+Перед созданием объекта Ingress нужно создать сервис, его можно так же описать при помощи конфигурационного файла, однако в данном случае для его создания по аналогии с предыдущими лабораторными была применена следующая команда:
 ```bash
 minikube kubectl -- expose replicaset lab3-deployment --port=3000 --name=lab3-service --type=ClusterIP
 ```
@@ -82,6 +82,7 @@ minikube kubectl -- apply -f ingress.yaml
 #### 5. Настройка `HOSTS`
 Для начало нужно узнать IP-адрес, на котором работает minikube, это было сделано при помощи следующей команды:
 ![image](./images/ip.png)
+
 Затем была добавлена конфигурация в файл `/etc/hosts`:
 ![image](./images/hosts.png)
 
